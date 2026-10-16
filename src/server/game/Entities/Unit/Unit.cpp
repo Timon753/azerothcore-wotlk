@@ -9611,6 +9611,17 @@ uint32 Unit::GetDamageImmunityMask() const
     return mask;
 }
 
+uint32 Unit::GetMechanicImmunityMask() const
+{
+    uint32 mask = 0;
+    // IMMUNITY_MECHANIC maps mechanic -> spellId; fold the mechanics into a
+    // bitmask using bit (mechanic - 1) so it lines up with the Lua side.
+    for (auto const& [mechanic, _] : m_spellImmune[IMMUNITY_MECHANIC])
+        if (mechanic > 0 && mechanic < 32)
+            mask |= (1u << (mechanic - 1));
+    return mask;
+}
+
 bool Unit::IgnoresSchoolImmunityFromFriendlyCaster(Unit const* caster, uint32 immunityAuraId, SpellInfo const* immunitySpellInfo) const
 {
     if (!caster || !caster->IsFriendlyTo(this))

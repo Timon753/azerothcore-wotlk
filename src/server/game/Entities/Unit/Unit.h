@@ -1654,6 +1654,9 @@ public:
 
     [[nodiscard]] uint32 GetSchoolImmunityMask() const;
     [[nodiscard]] uint32 GetDamageImmunityMask() const;
+    // Bit i set  <=>  immune to mechanic (i+1); same layout as the Lua
+    // Constants.MechanicBit. Backed by m_spellImmune[IMMUNITY_MECHANIC].
+    [[nodiscard]] uint32 GetMechanicImmunityMask() const;
 
     [[nodiscard]] bool IsImmunedToDamageOrSchool(SpellSchoolMask schoolMask) const;
     [[nodiscard]] bool IsImmunedToAuraPeriodicTick(Unit const* caster, SpellInfo const* spellInfo) const;
